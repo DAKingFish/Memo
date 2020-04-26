@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Dropdown } from 'antd'
+import { Menu, Dropdown, Button } from 'antd'
 import { observer, inject } from 'mobx-react'
 import './index.less'
 @inject('Mome')//注入
@@ -14,7 +14,7 @@ class File extends React.Component {//文件列表 插件类
       <Menu.Item key='1'
         onClick={
           () => {
-            setFileByKey('item', true, index)
+            setFileByKey('edit', true, index)
           }
         }
       >
@@ -33,40 +33,56 @@ class File extends React.Component {//文件列表 插件类
         </Menu.Item>
     </Menu>
   }
-  render() {
-    const { files, setFileByKey } = this.props.Mome // 结构解析
-    return <div className='app-file-box'>
-      {
-        files && files.map((item, index) => {
-          return <div key={item.key} className='file-box'>
-            {(files[index].item) ? <input autoFocus value={item.fileName} onChange={
-              (e) => {
-                console.log(e.target.value)
-                setFileByKey('name', e.target.value, index) // 调用父组件 编辑文件名
+  renderFile = (files, setFileByKey) => {
+    return <div className='file-box'>
+      <div className='file-box-body'>
+        {
+          files.map((item, index) => {
+            return item.edit ? <input
+              autoFocus
+              key={item.key} 
+              value={item.name}
+              onChange={
+                (e) => {
+                  setFileByKey('name', e.target.value, index) // 调用父组件 编辑文件名
+                }
               }
-            }
               onBlur={ // 关闭编辑
                 () => {
-                  setFileByKey('item', false, index)
+                  setFileByKey('edit', false, index)
                 }
               }
-            />
-              :
-              <Dropdown overlay={this.menu(index)} trigger={['contextMenu']}>
-                <div className='file-div' onClick={//单击打开文本
-                  () => {
-                    setFileByKey('context',true,index)
+            /> : <Dropdown key={item.key} overlay={this.menu(index)} trigger={['contextMenu']}>
+                <div
+                  className={item.active ? 'file-div-active' : 'file-div'}
+                  onClick={//单击打开文本
+                    () => {
+                      setFileByKey('active', true, index)
+                    }
                   }
-                }
-                  style={{ backgroundColor: item.active ? '#37373D' : '#1e1e1e' }}
                 >
                   {item.name}
                 </div>
               </Dropdown>
-            }
-
-          </div>
-        })
+          })
+        }
+      </div>
+      <div className='file-box-bottom'>
+        <button onClick={
+          () => {
+            this.props.Mome.addFile()
+          }
+        }>新建文件</button>
+      </div>
+    </div>
+  }
+  render() {
+    const { files, setFileByKey } = this.props.Mome // 结构解析
+    return <div className='app-file-box'>
+      {
+        files === null ? <div className='app-file-box-none'>
+          请先选择一个文件夹
+        </div> : this.renderFile(files, setFileByKey)
       }
     </div>
   }

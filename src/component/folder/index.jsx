@@ -7,17 +7,19 @@ import './index.less'
 class Folder extends React.Component {
   menu = (index) => {
     const {
-      setFolderByKey
+      addFolder,
+      setFolderByKey,
+      deleteFolder
     } = this.props.Mome
     return <Menu>
       <Menu.Item
         onClick={
           () => {
-            this.addFile(index);
+            addFolder()
           }
         }
       >
-        新建
+        新建文件夹
 			</Menu.Item>
       <Menu.Item
         onClick={
@@ -32,7 +34,7 @@ class Folder extends React.Component {
         onClick={
           () => {
             if (confirm('你确认删除')) {
-              this.deleteFolder(index)
+              deleteFolder(index)
             }
           }
         }

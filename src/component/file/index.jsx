@@ -34,7 +34,7 @@ class File extends React.Component {//文件列表 插件类
     </Menu>
   }
   render() {
-    const { files, setFileByKey } = this.props.Memo // 结构解析
+    const { files, setFileByKey } = this.props.Mome // 结构解析
     return <div className='app-file-box'>
       {
         files && files.map((item, index) => {

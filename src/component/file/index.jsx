@@ -2,8 +2,8 @@ import React from 'react'
 import { Menu, Dropdown } from 'antd'
 import { observer, inject } from 'mobx-react'
 import './index.less'
-@inject('Mome')
-@observer
+@inject('Mome')//注入
+@observer//申明使用mobx 观察者
 class File extends React.Component {//文件列表 插件类
   menu = (index) => {
     const {
@@ -14,7 +14,7 @@ class File extends React.Component {//文件列表 插件类
       <Menu.Item key='1'
         onClick={
           () => {
-            setFileByKey(index)
+            setFileByKey('item', true, index)
           }
         }
       >
@@ -34,33 +34,33 @@ class File extends React.Component {//文件列表 插件类
     </Menu>
   }
   render() {
-    const { files, saveFile } = this.props.Memo // 结构解析
+    const { folders, files, setFileByKey } = this.props.Memo // 结构解析
     return <div className='app-file-box'>
       {
-        files && files.fileArray.map((item, index) => {
+        folders && folders.files.map((item, index) => {
           return <div key={item.key} className='file-box'>
-            {(files.fileArray[index].active) ? <input autoFocus value={item.fileName} onChange={
+            {(folders.files[index].item) ? <input autoFocus value={item.fileName} onChange={
               (e) => {
                 console.log(e.target.value)
-                saveFile(index, e.target.value) // 调用父组件
+                setFileByKey('name', e.target.value, index) // 调用父组件 编辑文件名
               }
             }
               onBlur={ // 关闭编辑
                 () => {
-                  this.props.closeFile(index)
+                  setFileByKey('item', false, index)
                 }
               }
             />
               :
               <Dropdown overlay={this.menu(index)} trigger={['contextMenu']}>
-                <div className='file-div' onClick={
+                <div className='file-div' onClick={//单击打开文本
                   () => {
-                    this.props.openFile(index)
+                    setFileByKey('context',true,index)
                   }
                 }
-                  style={{ backgroundColor: item.light ? '#37373D' : '#1e1e1e' }}
+                  style={{ backgroundColor: item.active ? '#37373D' : '#1e1e1e' }}
                 >
-                  {item.fileName}
+                  {item.name}
                 </div>
               </Dropdown>
             }

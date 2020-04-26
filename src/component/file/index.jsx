@@ -9,7 +9,7 @@ class File extends React.Component {//文件列表 插件类
     const {
       setFileByKey,
       deleteFile
-    } = this.props.Memo
+    } = this.props.Mome
     return <Menu>
       <Menu.Item key='1'
         onClick={

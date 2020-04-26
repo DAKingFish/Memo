@@ -34,12 +34,12 @@ class File extends React.Component {//文件列表 插件类
     </Menu>
   }
   render() {
-    const { folders, files, setFileByKey } = this.props.Memo // 结构解析
+    const { files, setFileByKey } = this.props.Memo // 结构解析
     return <div className='app-file-box'>
       {
-        folders && folders.files.map((item, index) => {
+        files && files.map((item, index) => {
           return <div key={item.key} className='file-box'>
-            {(folders.files[index].item) ? <input autoFocus value={item.fileName} onChange={
+            {(files[index].item) ? <input autoFocus value={item.fileName} onChange={
               (e) => {
                 console.log(e.target.value)
                 setFileByKey('name', e.target.value, index) // 调用父组件 编辑文件名

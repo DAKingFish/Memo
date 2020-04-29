@@ -5,29 +5,33 @@ import './index.less'
 @observer
 class Login extends React.Component {
   render() {
-    const { user: { name, pass }, changeValue } = this.props.User
+    const { user: { name, password }, changeValue } = this.props.User
     return <div className='app-login'>
-      <div className='login-name'>
-        <input placeholder='输入用户名' value={name} onChange={
-          (e) => {
-            changeValue('name', e.target.value)
-          }
-        } />
-      </div>
-      <div className='login-password'>
-        <input placeholder='请输入密码' value={pass} onChange={
-          (e) => {
-            changeValue('pass', e.target.value)
-            alert(pass)
-          }
-        } />
-      </div>
-      <div className='login-button'>
-        <button onClick={
-          () => {
-            alert(name, pass)
-          }
-        }>登录</button>
+      <div className='login-body'>
+        <div className='login-title'>用户登录</div>
+        <div className='login-name'>
+          用户名<i className='iconfont icon-yonghuming'></i>:
+          <input placeholder='输入用户名' value={name} onChange={
+            (e) => {
+              changeValue('name', e.target.value)
+            }
+          } />
+        </div>
+        <div className='login-password'>
+          密码<i className='iconfont icon-mima'></i>:
+          <input placeholder='请输入密码' value={password} onChange={
+            (e) => {
+              changeValue('password', e.target.value)
+            }
+          } />
+        </div>
+        <div className='login-button'>
+          <button onClick={
+            () => {
+              alert('姓名' + name + '密码' + password)
+            }
+          }>登录</button>
+        </div>
       </div>
     </div>
   }

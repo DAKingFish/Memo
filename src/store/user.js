@@ -3,7 +3,7 @@ class User {
   @observable isLogin = true
   @observable user = {
     name: '',
-    pass: ''
+    password: ''
   }
   @action toLogin = () => { // 调登录接口
   }

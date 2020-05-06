@@ -35,8 +35,8 @@ module.exports = {
     }]
   },
   devServer: {
-    host: '127.0.0.1',
-    port: 8000,
+    host: '192.168.0.117',
+    port:80,
     compress: true,
     contentBase: './www',
     historyApiFallback:{

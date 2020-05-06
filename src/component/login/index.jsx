@@ -5,7 +5,7 @@ import './index.less'
 @observer
 class Login extends React.Component {
   render() {
-    const { user: { name, password }, changeValue } = this.props.User
+    const { user: { name, password }, changeValue, toLogin } = this.props.User
     return <div className='app-login'>
       <div className='login-body'>
         <div className='login-title'>用户登录</div>
@@ -28,7 +28,7 @@ class Login extends React.Component {
         <div className='login-button'>
           <button onClick={
             () => {
-              alert('姓名' + name + '密码' + password)
+              toLogin()
             }
           }>登录</button>
         </div>

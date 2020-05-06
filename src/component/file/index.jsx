@@ -5,7 +5,7 @@ import './index.less'
 @inject('Mome')//注入
 @observer//申明使用mobx 观察者
 class File extends React.Component {//文件列表 插件类
-  menu = (index) => {
+  menu = (index,id) => {
     const {
       setFileByKey,
       deleteFile
@@ -24,7 +24,7 @@ class File extends React.Component {//文件列表 插件类
         onClick={
           () => {
             if (confirm('你确认删除')) {
-              deleteFile(index)
+              deleteFile(index,id)
             }
           }
         }
@@ -48,11 +48,12 @@ class File extends React.Component {//文件列表 插件类
                 }
               }
               onBlur={ // 关闭编辑
-                () => {
+                (e) => {
                   setFileByKey('edit', false, index)
+                  this.props.Mome.changeFileName(e.target.value,item.id)
                 }
               }
-            /> : <Dropdown key={item.key} overlay={this.menu(index)} trigger={['contextMenu']}>
+            /> : <Dropdown key={item.key} overlay={this.menu(index,item.id)} trigger={['contextMenu']}>
                 <div
                   className={item.active ? 'file-div-active' : 'file-div'}
                   onClick={//单击打开文本

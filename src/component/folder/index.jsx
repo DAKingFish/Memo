@@ -2,10 +2,14 @@ import React from 'react'
 import { Menu, Dropdown } from 'antd'
 import { observer, inject } from 'mobx-react'
 import './index.less'
+import { set } from 'mobx'
 @inject('Mome')
 @observer
 class Folder extends React.Component {
-  menu = (index) => {
+  componentWillMount(){
+    this.props.Mome.getFolder() // 查询所有文件夹
+  }
+  menu = (index,id) => {
     const {
       addFolder,
       setFolderByKey,
@@ -34,7 +38,7 @@ class Folder extends React.Component {
         onClick={
           () => {
             if (confirm('你确认删除')) {
-              deleteFolder(index)
+              deleteFolder(index, id)
             }
           }
         }
@@ -47,7 +51,9 @@ class Folder extends React.Component {
     const {
       folders,
       setFolderByKey,
-      addFolder
+      addFolder,
+      getFile,
+      changeFolderName
     } = this.props.Mome
     return [<div className='left-folder' key={'left-folder'}>
       {
@@ -62,14 +68,17 @@ class Folder extends React.Component {
               }
             }
             onBlur={ // 关闭编辑
-              () => {
+              (e) => {
                 setFolderByKey('edit', false, index)
+                changeFolderName(e.target.value,item.id)
               }
             }
-          /> : <Dropdown key={item.key} overlay={this.menu(index)} trigger={['contextMenu']}>
+          /> : <Dropdown key={item.key} overlay={this.menu(index,item.id)} trigger={['contextMenu']}>
               <div className={item.active ? 'divactive' : 'folder-div'} onClick={
                 () => {
-                  setFolderByKey('active', true, index)
+                  setFolderByKey('active', true, index);
+                  // 查询该文件下的文件
+                  getFile(item.id)
                 }
               }
               >

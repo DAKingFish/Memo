@@ -6,6 +6,9 @@ module.exports = {
     path: path.join(__dirname, './www'),
     filename: 'app.js'
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
   module: {
     rules: [{
       test: /\.css$/,

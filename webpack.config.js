@@ -1,9 +1,9 @@
 const path = require('path')
 module.exports = {
-  mode: 'development', // '构建模式'
+  mode: process.env.NODE_ENV == "production" ? 'production' : 'development', // '构建模式'
   entry: path.join(__dirname, './src/index.jsx'),
   output: {
-    path: path.join(__dirname, './www'),
+    path: process.env.NODE_ENV === "production" ? path.resolve(__dirname, './out') : path.resolve(__dirname, './www'),
     filename: 'app.js'
   },
   resolve: {
@@ -37,9 +37,12 @@ module.exports = {
       }
     }]
   },
+  performance: {
+    hints: false
+  },
   devServer: {
-    host: '192.168.0.117',
-    port:80,
+    host: '127.0.0.1',
+    port:8000,
     compress: true,
     contentBase: './www',
     historyApiFallback:{

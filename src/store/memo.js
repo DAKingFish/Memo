@@ -14,6 +14,7 @@ class Mome {
   @observable folders = []  // 所有的文件夹
   @observable files = null    // 所有的文件
   @observable context = null // 文本
+  @observable edit = false //文本状态
 
   @action getFolder = async () => {
     const { code, data } = await get('/mome/getfolder', {
@@ -183,12 +184,15 @@ class Mome {
     const { code } = await post('/mome/updatefile', {
       id, content: value
     })
-    if(code === 200) {
+    if (code === 200) {
       this.context[key] = value
-    }else{
+    } else {
       message.error('修改备忘录失败')
     }
- 
+
+  }
+  @action setEdit = (value) => {
+    this.edit = value
   }
 }
 const mome = new Mome() //创建mome类实际对象 

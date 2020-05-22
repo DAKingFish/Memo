@@ -1,6 +1,6 @@
 import axios from 'axios'
 const qs = require('qs')
-const baseUrl = 'http://192.168.0.113:8360'
+const baseUrl = 'http://182.92.240.91:8360'
 const get = async (url, params) => {
   url = baseUrl + url
   let response = null

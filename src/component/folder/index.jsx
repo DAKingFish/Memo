@@ -53,7 +53,8 @@ class Folder extends React.Component {
       setFolderByKey,
       addFolder,
       getFile,
-      changeFolderName
+      changeFolderName,
+      setEdit
     } = this.props.Mome
     return [<div className='left-folder' key={'left-folder'}>
       {
@@ -79,6 +80,7 @@ class Folder extends React.Component {
                   setFolderByKey('active', true, index);
                   // 查询该文件下的文件
                   getFile(item.id)
+                  setEdit(false)
                 }
               }
               >

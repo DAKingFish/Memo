@@ -15,6 +15,7 @@ class File extends React.Component {//文件列表 插件类
         onClick={
           () => {
             setFileByKey('edit', true, index)
+           
           }
         }
       >
@@ -34,6 +35,9 @@ class File extends React.Component {//文件列表 插件类
     </Menu>
   }
   renderFile = (files, setFileByKey) => {
+    const {
+      setEdit 
+    } = this.props.Mome
     return <div className='file-box'>
       <div className='file-box-body'>
         {
@@ -59,6 +63,7 @@ class File extends React.Component {//文件列表 插件类
                   onClick={//单击打开文本
                     () => {
                       setFileByKey('active', true, index)
+                      setEdit(false)
                     }
                   }
                 >

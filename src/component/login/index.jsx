@@ -7,6 +7,8 @@ class Login extends React.Component {
   render() {
     const { user: { name, password }, changeValue, toLogin } = this.props.User
     return <div className='app-login'>
+      <div className='login-left'></div>
+      <div className='login-right'></div>
       <div className='login-body'>
         <div className='login-title'>用户登录</div>
         <div className='login-name'>

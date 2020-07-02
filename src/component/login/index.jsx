@@ -8,7 +8,7 @@ class Login extends React.Component {
     const { user: { name, password }, changeValue, toLogin } = this.props.User
     return <div className='app-login'>
       <div className='login-left'>
-        <i className='iconfont icon-jishiben1'></i>
+        <i className='iconfont icon-wuguan'></i>
          <span className='icp'>©2020 JinYuanAI 皖ICP备19007022号</span>
       </div>
       <div className='login-right'></div>

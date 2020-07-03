@@ -1,4 +1,5 @@
 const path = require('path')
+console.log( process.env.NODE_ENV === "production", process.env.NODE_ENV)
 module.exports = {
   mode: process.env.NODE_ENV == "production" ? 'production' : 'development', // '构建模式'
   entry: path.join(__dirname, './src/index.jsx'),
